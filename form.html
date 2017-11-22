@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Form</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="wrapper">
+			<header class="header header-form">
+				<nav class="nav">
+					<ul class="nav-list">
+						<li><a class="nav-item" href="#" id="navList">List</a></li>
+						<li><a class="nav-item active-nav-item" href="#" id="navAdd">Add</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main class="main-form">
+				<form class="form" id="form">
+					<input type="hidden" id="formInvoiceId" name="invoicesid" />
+					<label for="formName">Name</label>
+					<input type="text" id="formName" name="name" />
+					<p class="input-error js-input-error"></p>
+					<label for="formValue">Value</label>
+					<input type="text" id="formValue" name="val" />
+					<p class="input-error js-input-error"></p>
+					<label for="formDate">Date</label>
+					<input type="date" id="formDate" name="date" />
+					<p class="input-error js-input-error"></p>
+					<div class="two-buttons-wrapper">
+						<button type="button" class="btn btn-add-invoices" id="btnAddInvoice">Add</button>
+						<button type="reset" class="btn">Reset</button>
+					</div>
+				</form>
+			</main>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+	<script src="script.js"></script>	
+</body>
+</html>
