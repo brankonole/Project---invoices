@@ -40,6 +40,7 @@ a, a:hover, a:focus, a:active, a:visited { text-decoration: none; }
 .nav-item:hover, .nav-item.active-nav-item {	border-bottom: 5px solid #A7ACB1; }
 .main-form { display: flex; justify-content: center; }
 .form {
+  min-width: 250px;
   padding: 50px 20px;
   display: flex;
   flex-direction: column;
@@ -58,6 +59,20 @@ a, a:hover, a:focus, a:active, a:visited { text-decoration: none; }
   background-color: rgba(21, 179, 116, 0.2);
   color: #fff;
 }
+.form .input-error {
+  font-size: 10px;
+  color: #ff6a6a;
+  padding: 5px 0px 0 10px;
+  font-weight: 500;
+}
+.form .input-error:empty { display: none; }
+.form .btn-add-new-field {
+  margin-left: auto;
+  margin-top: 0;
+  border: 2px solid rgb(21, 179, 116);
+  height: 35px;
+  font-size: 10px;
+  }
 .form .two-buttons-wrapper { display: flex; justify-content: space-between; }
 .form .two-buttons-wrapper .btn-add-invoices { margin-right: 20px; }
 table {

@@ -25,14 +25,16 @@ let url = 'https://c7xj8b7r70.execute-api.us-east-1.amazonaws.com/latest/invoice
 
 let navList = $('#navList'),
 	navAdd =$('#navAdd'),
-	tableBody = $('#tableBody'),
-	btnAddInvoice =$('#btnAddInvoice');
+	tableBody = $('#tableBody');
 
 let form = $('#form'),
 	formInvoiceId = $('#formInvoiceId'),
 	formName = $('#formName'),
 	formValue = $('#formValue'),
-	formDate = $('#formDate');
+	formDate = $('#formDate'),
+	btnAddInvoice =$('#btnAddInvoice'),
+	btnAddNewField = $('#btnAddNewField'),
+	isFormValid = true;
 
 if (location.href.indexOf('index.html') !== -1) {
 	getData(function(data) {
@@ -160,6 +162,46 @@ function populateData(data) {
 	btnAddInvoice.html('Edit');
 }
 
+function addNewField() {
+	let newLabel = `<label for="formNewLabel" id="formNewLabel">New label</label>`,
+		newField = `<input type="text" id="formNewField" name="newField" />`,
+		newErrorMessage = `<p class="input-error js-input-error"></p>`;
+
+	form.find('.js-input-error').last().after(newLabel);
+	form.find('label').last().after(newField);
+	form.find('input').last().after(newErrorMessage);	
+}
+
+function formValidation() {
+	$('.js-input-error').html('');
+
+	isFormValid = true;
+
+	let dateArr = formDate.val().split('-');
+
+	for (let i = 0; i < dateArr.length; i++) {
+		if (Number.isInteger(parseInt(dateArr[i])) === false) {
+			formDate.next().html('Please enter valid date');
+			isFormValid = false;
+		}
+	}
+
+	if (formName.val().length < 1) {
+		formName.next().html('Please fill Name');
+		isFormValid = false;
+	}
+
+	if (formValue.val().length < 1) {
+		formValue.next().html('Please fill Value');
+		isFormValid = false;
+	}
+
+	if (formDate.val().indexOf('-') !== 4 && formDate.val().indexOf('-') !== 7) {
+		formDate.next().html('Please enter valid date');
+		isFormValid = false;
+	}
+}
+
 navList.on('click', function() {
 	goToHomePage();
 });
@@ -169,12 +211,16 @@ navAdd.on('click', function() {
 });
 
 btnAddInvoice.on('click', function () {
-	let invoice = form.serializeObject();
+	formValidation();
 
-	if (mode === 'new') {
-		addNewInvoice(invoice, goToHomePage);
-	} else {
-		editInvoice(invoice, goToHomePage);
+	if (isFormValid) {
+		let invoice = form.serializeObject();
+
+		if (mode === 'new') {
+			addNewInvoice(invoice, goToHomePage);
+		} else {
+			editInvoice(invoice, goToHomePage);
+		}
 	}
 });
 
@@ -186,4 +232,8 @@ tableBody.on('click','.js-btn-delete', function() {
 tableBody.on('click', '.js-btn-edit', function() {
 	let invoiceId = $(this).closest('.js-invoice-row').data('invoice-id');
 	goToFormPage(invoiceId);
+});
+
+btnAddNewField.on('click', function() {
+	addNewField();
 });
